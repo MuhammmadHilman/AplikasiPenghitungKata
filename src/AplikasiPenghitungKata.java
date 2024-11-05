@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-/**
- *
- * @author Hilman
- */
 public class AplikasiPenghitungKata extends javax.swing.JFrame {
 
     /**
@@ -15,6 +14,12 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
      */
     public AplikasiPenghitungKata() {
         initComponents();
+        txtAreaInput = new javax.swing.JTextArea();
+        txtAreaInput.setColumns(20);
+        txtAreaInput.setRows(5);
+        txtAreaInput.setLineWrap(true);          // Aktifkan pemotongan garis
+        txtAreaInput.setWrapStyleWord(true);     // Potong pada batas kata
+        jScrollPane1.setViewportView(txtAreaInput);
     }
 
     /**
@@ -25,6 +30,7 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -42,79 +48,126 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
         jLabel1.setText("Masukan Text");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(68, 35, 0, 0);
+        jPanel1.add(jLabel1, gridBagConstraints);
 
         txtAreaInput.setColumns(20);
         txtAreaInput.setRows(5);
         jScrollPane1.setViewportView(txtAreaInput);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 473;
+        gridBagConstraints.ipady = 108;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(11, 35, 0, 20);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
+
         jLabel2.setText("Cari Kata");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 0, 0);
+        jPanel1.add(jLabel2, gridBagConstraints);
 
         btnCariKata.setText("Cari");
+        btnCariKata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariKataActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 18, 0, 0);
+        jPanel1.add(btnCariKata, gridBagConstraints);
 
         btnHitung.setText("Hitung");
+        btnHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHitungActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 0, 0);
+        jPanel1.add(btnHitung, gridBagConstraints);
 
         btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 20, 0, 0);
+        jPanel1.add(btnSimpan, gridBagConstraints);
 
         lblJumlahKata.setText("Jumlah Kata");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 0, 0);
+        jPanel1.add(lblJumlahKata, gridBagConstraints);
 
         lblJumlahKarakter.setText("Jumlah Karakter");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 0, 0);
+        jPanel1.add(lblJumlahKarakter, gridBagConstraints);
 
         lblJumlahKalimat.setText("Jumlah Kalimat");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 0, 0);
+        jPanel1.add(lblJumlahKalimat, gridBagConstraints);
 
         lblJumlahParagraf.setText("Jumlah Paragraf");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblJumlahParagraf)
-                    .addComponent(lblJumlahKalimat)
-                    .addComponent(lblJumlahKarakter)
-                    .addComponent(lblJumlahKata)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnHitung)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnSimpan))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtCariKata, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCariKata)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCariKata)
-                    .addComponent(txtCariKata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHitung)
-                    .addComponent(btnSimpan))
-                .addGap(18, 18, 18)
-                .addComponent(lblJumlahKata)
-                .addGap(18, 18, 18)
-                .addComponent(lblJumlahKarakter)
-                .addGap(18, 18, 18)
-                .addComponent(lblJumlahKalimat)
-                .addGap(18, 18, 18)
-                .addComponent(lblJumlahParagraf)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 35, 42, 0);
+        jPanel1.add(lblJumlahParagraf, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 195;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 35, 0, 0);
+        jPanel1.add(txtCariKata, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,6 +188,57 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
+        // TODO add your handling code here:
+        String teks = txtAreaInput.getText();
+
+        int jumlahKarakter = teks.length();
+        int jumlahKata = teks.trim().isEmpty() ? 0 : teks.trim().split("\\s+").length;
+        int jumlahKalimat = teks.split("[.!?]+").length;
+        int jumlahParagraf = teks.split("\n+").length;
+
+        lblJumlahKarakter.setText("Jumlah Karakter: " + jumlahKarakter);
+        lblJumlahKata.setText("Jumlah Kata: " + jumlahKata);
+        lblJumlahKalimat.setText("Jumlah Kalimat: " + jumlahKalimat);
+        lblJumlahParagraf.setText("Jumlah Paragraf: " + jumlahParagraf);
+    }//GEN-LAST:event_btnHitungActionPerformed
+
+    private void btnCariKataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariKataActionPerformed
+        // TODO add your handling code here:
+        String teks = txtAreaInput.getText();
+        String kataCari = txtCariKata.getText();
+    
+        int jumlahKataDitemukan = teks.split("(?i)\\b" + kataCari + "\\b").length - 1;
+    
+        JOptionPane.showMessageDialog(this, "Jumlah kemunculan kata '" + kataCari + "': " + jumlahKataDitemukan);
+    }//GEN-LAST:event_btnCariKataActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+            
+            try (PrintWriter writer = new PrintWriter(file)) {
+                writer.println("Teks:");
+                writer.println(txtAreaInput.getText());
+                writer.println();
+                writer.println("Hasil Perhitungan:");
+                writer.println("Jumlah Karakter: " + lblJumlahKarakter.getText());
+                writer.println("Jumlah Kata: " + lblJumlahKata.getText());
+                writer.println("Jumlah Kalimat: " + lblJumlahKalimat.getText());
+                writer.println("Jumlah Paragraf: " + lblJumlahParagraf.getText());
+                writer.flush();
+            }   
+            
+                JOptionPane.showMessageDialog(this, "Hasil perhitungan berhasil disimpan.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan file.");
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
