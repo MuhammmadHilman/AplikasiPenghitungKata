@@ -2,6 +2,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.BufferedWriter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,8 +22,42 @@ public class AplikasiPenghitungKata extends javax.swing.JFrame {
         txtAreaInput.setLineWrap(true);          // Aktifkan pemotongan garis
         txtAreaInput.setWrapStyleWord(true);     // Potong pada batas kata
         jScrollPane1.setViewportView(txtAreaInput);
-    }
+        
+        // Menambahkan DocumentListener untuk menghitung secara real-time
+        txtAreaInput.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                hitungTeks();
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                hitungTeks();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                hitungTeks();
+            }
+        });
+        
+    }
+    
+    private void hitungTeks() {
+        String teks = txtAreaInput.getText();
+
+        int jumlahKarakter = teks.length();
+        int jumlahKata = teks.trim().isEmpty() ? 0 : teks.trim().split("\\s+").length;
+        int jumlahKalimat = teks.split("[.!?]+").length;
+        int jumlahParagraf = teks.split("\n+").length;
+
+        lblJumlahKarakter.setText("Jumlah Karakter: " + jumlahKarakter);
+        lblJumlahKata.setText("Jumlah Kata: " + jumlahKata);
+        lblJumlahKalimat.setText("Jumlah Kalimat: " + jumlahKalimat);
+        lblJumlahParagraf.setText("Jumlah Paragraf: " + jumlahParagraf);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
